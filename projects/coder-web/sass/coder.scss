@@ -1,0 +1,1500 @@
+/*Bu Tasarım Emrah Kahraman tarafından kodlanmıstır.*/
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=devanagari,latin-ext');
+@import "_variable.scss";
+@import "_mixins.scss";
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  background-color: #0a0807;
+  font-family: $family;
+  font-size: $size;
+  color: $base-color;
+}
+
+#header {
+  width: 100%;
+  //header-wrapper
+  .header-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    //logo
+    .logo {
+      img {
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        @include transition(0.3s);
+        &:hover {
+          @include scale(1.1);
+        }
+      }
+    }
+    //menu
+    .menu {
+      padding-top: 42px;
+      li {
+        display: inline-block;
+        margin-right: 25px;
+        a {
+          font-family: Poppins Light;
+          color: $base-color;
+          font-size: 14px;
+          padding: 38px 10px 20px 10px;
+          &:active, &:hover {
+            background-color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+  //banner
+  .banner {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    //banner-text
+    .banner-text {
+      width: 30%;
+      h5 {
+        display: inline-block;
+        background-color: $primary-color;
+        padding: 15px 25px;
+        @include border-radius(3px);
+        position: relative;
+        &::before {
+          display: block;
+          content: '';
+          position: absolute;
+          left: 37%;
+          top: 106%;
+          margin-top: -3px;
+          border-right: 13px solid transparent;
+          border-top: 16px solid $primary-color;
+          border-left: 13px solid transparent
+        }
+      }
+      h6 {
+        padding-top: 35px;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      p {
+        padding-top: 30px;
+        font-family: Poppins Light;
+        font-size: 12px;
+      }
+      button {
+        margin: 50px 5px 0 0;
+        @include border-radius(5px);
+        border: 1px solid $secondary-color;
+        background-color: transparent;
+        padding: 15px 20px;
+        font-size: 14px;
+        color: $base-color;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        @include transition(0.3s);
+        &:focus, &:hover {
+          background-color: $primary-color;
+          border: none;
+        }
+      }
+    }
+    //banner-img
+    .banner-img {
+      width: 70%;
+      img {width: 100%}
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      @include flex-direction(column);
+      @include align-items(center);
+      text-align: center;
+      //banner-text
+      .banner-text {
+        width: 100%;
+        margin-top: 50px;
+        h6 {font-size: 30px}
+      }
+      //banner-img
+      .banner-img {
+        width: 100%;
+        margin-top: 50px;
+      }
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      .banner-text {
+        h5 {font-size: 12px}
+        h6 {font-size: 20px}
+        button {
+          width: 100%;
+          margin: 20px 0 0 0;
+          text-align: center;
+          padding: 15px 30px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+//Menu
+.slicknav_menu {
+  display:none;
+  background-color: transparent;
+  width: 100%;
+  position: absolute;
+  top: 13px;
+  right: 0;
+  //slicknav_btn
+  .slicknav_btn {
+    background-color: transparent;
+    .slicknav_menutxt {display: none}
+      //slicknav_icon
+      .slicknav_icon {
+        cursor: pointer;
+        .slicknav_icon-bar {
+          display: block;
+          height: 5px;
+          width: 30px;
+          margin: 6px 0;
+          background: $base-color;
+          border-radius: 0;
+          opacity: 1;
+          @include rotate(0);
+          @include transition(0.25s);
+          &:nth-child(1) {
+            top: 0px;
+            @include transform-origin(left center);
+          }
+          &:nth-child(2) {
+            top: 16px;
+            @include transform-origin(left center);
+          }
+          &:nth-child(3) {
+            top: 33px;
+            @include transform-origin(left center);
+          }
+      }
+    }
+  }
+   //slicknav_open
+   .slicknav_open {
+    .slicknav_icon-bar {
+      &:nth-child(1) {
+        @include rotate(45deg);
+        top: -3px;
+        left: 8px;
+      }
+
+      &:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        @include rotate(-45deg);
+        top: 39px;
+        left: 8px;
+      }
+    }
+  }
+  //slicknav_nav
+  .slicknav_nav {
+    margin-top: 60px;
+    text-align: center;
+    background-color: $primary-color;
+    li {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      &:last-child {
+        padding-bottom: 0;
+      }
+      a {
+        padding: 10px;
+        &:hover {
+          background-color: $secondary-color;
+          color: $base-color;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: $notebook) {
+  .menu {
+    display:none;
+  }
+  .slicknav_menu {
+    display:block;
+  }
+}
+//Menu#
+
+//About#
+#about {
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  //about-wrapper
+  .about-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    //about-img
+    .about-img {
+      width: 50%;
+      position: relative;
+      img {width: 100%}
+      .overlay {
+        position: absolute;
+        bottom: -60px;
+        left: 0;
+      }
+    }
+    //about-text
+    .about-text {
+      width: 50%;
+      padding-left: 50px;
+      h6 {
+        font-size: 35px;
+        font-weight: bold;
+      }
+      p {
+        padding-top: 40px;
+        font-family: Poppins Light;
+        font-size: $size;
+        line-height: 21px;
+      }
+      //progress
+      .progress {
+        margin-top: 20px;
+        .skill {
+          position: relative;
+          overflow-x: hidden;
+          margin-top: -15px;
+          > p {
+            font-size: 18px;
+            font-weight: 700;
+            color: $base-color;
+            padding-bottom: 5px;
+          }
+          &:before {
+            width: 100%;
+            height: 5px;
+            content: "";
+            display: block;
+            position: absolute;
+            background: $secondary-color;
+            bottom: 0;
+          }
+        }
+        .skill-bar {
+          width: 100%;
+          height: 5px;
+          background: $primary-color;
+          display: block;
+          position: relative;
+        }
+        .skill1 {
+          width: 95%;
+        }
+        .skill-bar {
+          span {
+            position: absolute;
+            top: -27px;
+            padding: 0;
+            font-size: 18px;
+            padding: 3px 0;
+            font-weight: 500;
+          }
+          position: relative;
+        }
+        .skill1 .skill-count1 {
+          right: 0;
+        }
+        .skill2 {
+          width: 85%;
+          .skill-count2 {
+            right: 0;
+          }
+        }
+        .skill3 {
+          width: 75%;
+          .skill-count3 {
+            right: 0;
+          }
+        }
+        .skill4 {
+          width: 65%;
+          .skill-count4 {
+            right: 0;
+          }
+        }
+        .skill5 {
+          width: 80%;
+          .skill-count5 {
+            right: 0;
+          }
+        }
+        .skill6 {
+          width: 90%;
+          .skill-count6 {
+            right: 0;
+          }
+        }
+      }
+      button {
+        margin: 50px 5px 0 0;
+        @include border-radius(5px);
+        border: 1px solid $secondary-color;
+        background-color: transparent;
+        padding: 15px 20px;
+        font-size: 14px;
+        color: $base-color;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        @include transition(0.3s);
+        &:focus, &:hover {
+          background-color: $primary-color;
+          border: none;
+        }
+      }
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      @include flex();
+      @include flex-direction(column);
+      //about-img
+      .about-img {
+        width: 100%;
+        .overlay {display: none}
+      }
+      //about-text
+      .about-text {
+        margin-top: 50px;
+        width: 100%;
+        padding-left: 0;
+      }
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      //about-text
+      .about-text {
+        h6 {
+          font-size: 25px;
+        }
+        p {
+          padding-top: 20px;
+          font-size: 12px;
+          line-height: 18px;
+        }
+        .progress {
+          margin-top: 30px;
+          .skill {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+  //Notebook
+  @media screen and (max-width: $notebook) {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+}
+
+//Services#
+#services {
+  width: 100%;
+  padding-top: 200px;
+  padding-bottom: 150px;
+  text-align: center;
+  //title
+  .title {
+    h6 {
+      font-size: 35px;
+      font-weight: bold;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -110px;
+        left: 0;
+        right: 0;
+        width: 2px;
+        height: 95px;
+        margin: 0 auto;
+        background-image: url("../img/before.png");
+        @include bg-size(cover);
+      }
+    }
+    p {
+      padding-top: 25px;
+      font-family: Poppins Light;
+      font-size: 16px;
+      line-height: 25px;
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      h6 {
+        font-size: 20px;
+      }
+      p {
+        padding-top: 15px;
+        font-size: 14px;
+        line-height: 20px;
+        br {display: none}
+      }
+    }
+  }
+  //services-wrapper
+  .services-wrapper {
+    margin-top: 70px;
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    //services-box
+    .services-box {
+      width: 31%;
+      background-color: $five-color;
+      padding: 20px;
+      @include flex();
+      @include justify-content(space-between);
+      @include align-items(center);
+      margin-bottom: 40px;
+      @include border-radius(5px);
+      @include transition(0.3s);
+      .services-icon {
+        i {
+          width: 50px;
+          height: 50px;
+          @include border-radius(50%);
+          background-color: #000;
+          line-height: 50px;
+          text-align: center;
+          font-size: 20px;
+          color: $base-color;
+        }
+        span {
+          padding-left: 10px;
+          font-family: Poppins Light;
+          font-size: 18px;
+        }
+      }
+      .icon-right {
+        i {color: $primary-color; font-size: 20px}
+      }
+      &:hover {
+        background-color: $primary-color;
+        cursor: pointer;
+        .services-icon {
+          i {
+            background-color: $base-color;
+            color: #000000;
+          }
+        }
+        .icon-right {
+          i {color: $base-color}
+        }
+      }
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      //services-box
+      .services-box {
+        width: 48%;
+      }
+    }
+    //Tablet
+    @media screen and (max-width: $tablet) {
+      //services-box
+      .services-box {
+        .services-icon {
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      @include flex();
+      @include flex-direction(column);
+      //services-box
+      .services-box {
+        width: 100%;
+        @include flex();
+        @include flex-direction(column);
+        @include align-items(center);
+        margin-bottom: 20px;
+        .services-icon {
+          text-align: center;
+          span {
+            padding-top: 15px;
+            display: block;
+            padding-left: 0;
+          }
+        }
+        .icon-right {display: none}
+      }
+    }
+  }
+  button {
+    margin-top: 30px;
+    background-color: $primary-color;
+    @include border-radius(10px);
+    text-align: center;
+    padding: 20px 50px;
+    color: $base-color;
+    cursor: pointer;
+  }
+  //Notebook
+  @media screen and (max-width: $notebook) {
+    padding-top: 140px;
+    button {
+      padding: 15px 30px;
+      font-size: 14px;
+    }
+  }
+}
+
+//Project-Counter
+#project-counter {
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  //counter-wrapper
+  .counter-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    text-align: center;
+    //counter-box
+    .counter-box {
+      width: 24%;
+      background-color: $five-color;
+      border: 2px dashed $secondary-color;
+      padding: 60px 40px;
+      @include transition(0.3s);
+      @include border-radius(10px);
+      .count {
+        font-weight: bold;
+        font-size: 50px;
+      }
+      h6 {
+        padding-top: 5px;
+        font-size: 25px;
+      }
+      &:hover {
+        background-color: $primary-color;
+        cursor: pointer;
+        border: none;
+      }
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      .counter-box {
+        margin-bottom: 30px;
+        width: 32%;
+        padding: 40px 20px;
+        .count {font-size: 30px}
+        h6 {font-size: 20px}
+      }
+    }
+    //Tablet
+    @media screen and (max-width: $tablet) {
+      .counter-box {
+        width: 49%;
+        padding: 40px 20px;
+        .count {font-size: 20px}
+        h6 {font-size: $size}
+      }
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      .counter-box {
+        width: 100%;
+        padding: 20px 10px;
+        .count {font-size: 20px}
+        h6 {font-size: $size}
+      }
+    }
+  }
+  //Notebook
+  @media screen and (max-width: $notebook) {
+    padding-bottom: 70px;
+  }
+  //Tablet
+  @media screen and (max-width: $tablet) {
+    padding-bottom: 50px;
+    padding-top: 0;
+  }
+}
+
+//Projects#
+#projects {
+  width: 100%;
+  padding-top: 200px;
+  padding-bottom: 100px;
+  text-align: center;
+  //title
+  .title {
+    h6 {
+      font-size: 35px;
+      font-weight: bold;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -110px;
+        left: 0;
+        right: 0;
+        width: 2px;
+        height: 95px;
+        margin: 0 auto;
+        background-image: url("../img/before.png");
+        @include bg-size(cover);
+      }
+    }
+    p {
+      padding-top: 25px;
+      font-family: Poppins Light;
+      font-size: 16px;
+      line-height: 25px;
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      h6 {
+        font-size: 20px;
+      }
+      p {
+        padding-top: 15px;
+        font-size: 14px;
+        line-height: 20px;
+        br {display: none}
+      }
+    }
+  }
+  //project-tab
+  .project-tab {
+    padding-top: 60px;
+    //tab-list
+    .tab-list {
+      li {
+        display: inline-block;
+        margin-right: 25px;
+        &:last-child {
+          margin-right: 0;
+        }
+        a {
+          color: $base-color;
+          font-family: 'Poppins Light';
+          font-size: 18px;
+        }
+        &.active, &:hover {
+          padding-bottom: 5px;
+          color: $primary-color;
+          border-bottom: 2px solid $primary-color;
+        }
+      }
+      @media screen and (max-width: $tablet) {
+        padding-top: 40;
+        li {
+          margin-right: 15px;
+          a {
+            font-size: $size;
+          }
+        }
+      }
+    }
+    //tab-content
+    .tab-content {
+      padding-top: 70px;
+      @include flex();
+      @include justify-content(space-between);
+      @include flex-wrap(wrap);
+      //tab-box
+      .tab-box {
+        width: 32%;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+        img {width: 100%}
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          padding-top: 110px;
+          cursor: pointer;
+          background-color: rgba(255, 73, 0, 0.7);
+          @include transition(0.3s);
+          @include border-radius(5px);
+          h6 {
+            font-size: 20px;
+            font-weight: bold;
+          }
+          h5 {
+            font-size: $size;
+            padding-top: 10px;
+          }
+          p {
+            padding-top: 35px;
+            font-family: 'Poppins Light';
+            font-size: 14px;
+            line-height: 25px;
+          }
+          i {
+            padding-top: 15px;
+            font-size: 25px;
+          }
+        }
+        &:hover .overlay {
+          top: 0;
+      }
+      .overlay {
+          top: 100%;
+       }
+      }
+      //Notebook
+      @media screen and (max-width: $notebook) {
+        //tab-box
+        .tab-box {
+          width: 49%;
+          .overlay {
+            padding-top: 80px;
+          }
+        }
+      }
+      //Tablet
+      @media screen and (max-width: $tablet) {
+        padding-top: 40px;
+        //tab-box
+        .tab-box {
+          width: 100%;
+          .overlay {
+            padding-top: 150px;
+          }
+        }
+      }
+      //Mobil
+      @media screen and (max-width: $mobil) {
+       //tab-box
+          .tab-box {
+            .overlay {
+             padding-top: 100px;
+             h6 {
+               font-size: 18px;
+            }
+            h5 {
+              font-size: 13px;
+              padding-top: 5px;
+            }
+            p {
+              padding-top: 20px;
+              font-size: 12px;
+              line-height: 18px;
+            }
+            i {
+              padding-top: 10px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      //Small
+      @media screen and (max-width: $small) {
+        //tab-box
+           .tab-box {
+             .overlay {
+              padding-top: 80px;
+              h6 {
+              font-size: 14px;
+             }
+             h5 {
+              font-size: 12px;
+              padding-top: 5px;
+             }
+             p {
+              padding-top: 15px;
+              font-size: 10px;
+              line-height: 18px;
+              br {display: none;}
+             }
+             i {
+              padding-top: 10px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      //X-Small
+      @media screen and (max-width: $x-small) {
+        //tab-box
+        .tab-box {
+          .overlay {
+            padding-top: 40px;
+            h6 {
+              font-size: 12px;
+            }
+            h5 {
+              font-size: 10px;
+              padding-top: 5px;
+            }
+            p {
+              padding-top: 10px;
+              font-size: 8px;
+              line-height: 15px;
+            }
+            i {
+              padding-top: 5px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      //X
+      @media screen and (max-width: $x) {
+        //tab-box
+        .tab-box {
+          .overlay {
+            padding-top: 20px;
+            h6 {
+              font-size: 10px;
+            }
+            h5 {
+              font-size: 8px;
+              padding-top: 5px;
+            }
+            p {
+              padding-top: 5px;
+              font-size: 8px;
+              line-height: 8px;
+            }
+            i {
+              padding-top: 5px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  button {
+    margin-top: 30px;
+    background-color: $primary-color;
+    @include border-radius(10px);
+    text-align: center;
+    padding: 20px 50px;
+    color: $base-color;
+    cursor: pointer;
+  }
+  //Notebook
+  @media screen and (max-width: $notebook) {
+    padding-top: 140px;
+    button {
+      padding: 15px 30px;
+      font-size: 14px;
+    }
+  }
+}
+
+//Clients#
+#clients {
+  width: 100%;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  text-align: center;
+  //title
+  .title {
+    h6 {
+      font-size: 35px;
+      font-weight: bold;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -110px;
+        left: 0;
+        right: 0;
+        width: 2px;
+        height: 95px;
+        margin: 0 auto;
+        background-image: url("../img/before.png");
+        @include bg-size(cover);
+      }
+    }
+    p {
+      padding-top: 25px;
+      font-family: Poppins Light;
+      font-size: 16px;
+      line-height: 25px;
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      h6 {
+        font-size: 16px;
+      }
+      p {
+        padding-top: 15px;
+        font-size: 14px;
+        line-height: 20px;
+        br {display: none}
+      }
+    }
+  }
+  //owl-clients
+  .owl-clients {
+    padding-top: 50px;
+    text-align: center;
+    //item
+    .item {
+      background-color: $five-color;
+      padding: 60px 50px;
+      img {
+        width: 15%;
+        margin: 0 auto;
+      }
+      h5 {
+        padding-top: 30px;
+        color: $primary-color;
+        font-size: 25px;
+        font-weight: bold;
+      }
+      h6 {
+        padding-top: 10px;
+        font-size: 18px;
+      }
+      p {
+        padding-top: 30px;
+        position: relative;
+        line-height: 25px;
+        font-family: Poppins Light;
+        font-size: 16px;
+        &::before {
+          font-family: 'Font Awesome 5 Free';
+	        content: "\f10d";
+          font-weight: 900;
+          color: $secondary-color;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        &::after {
+          font-family: 'Font Awesome 5 Free';
+	        content: "\f10e";
+          font-weight: 900;
+          color: $secondary-color;
+          position: absolute;
+          bottom: -10px;
+          right: 0;
+        }
+      }
+    }
+    //owl-dots
+    .owl-dots {
+      margin-top: 50px;
+      .owl-dot {
+        span {
+          width: 50px;
+          height: 10px;
+          background-color: $three-color;
+          @include border-radius(15px);
+        }
+      }
+      .active {
+        span {
+          width: 50px;
+          height: 10px;
+          background-color: $primary-color;
+          @include border-radius(15px);
+        }
+      }
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      //item
+      .item {
+        padding: 40px 30px;
+        img {width: 20%;}
+        h5 {
+          padding-top: 20px;
+          font-size: 18px;
+        }
+        h6 {
+          font-size: $size;
+        }
+        p {
+          padding-top: 20px;
+          font-size: 14px;
+        }
+      }
+    }
+    //Small
+    @media screen and (max-width: $small) {
+      //item
+      .item {
+        padding: 30px 20px;
+        img {width: 30%;}
+        h5 {
+          padding-top: 10px;
+          font-size: 15px;
+        }
+        h6 {
+          font-size: 12px;
+        }
+        p {
+          padding-top: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+//Hire-Me#
+#hire-me {
+  width: 100%;
+  height: 615px;
+  background-image: url(../img/hire-me-bg.png);
+  @include bg-size(cover);
+  object-fit: cover;
+  position: relative;
+  //center
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    color: $base-color;
+    text-align: center;
+    h5 {
+      font-size: 30px;
+      font-family: 'Poppins Light';
+    }
+    h6 {
+      padding-top: 40px;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 50px;
+      background-color: $primary-color;
+      color: $base-color;
+      padding: 15px 30px;
+      cursor: pointer;
+      @include border-radius(10px);
+    }
+  }
+  //Tablet
+  @media screen and (max-width: $tablet) {
+    .center {
+      h5 {
+        font-size: 20px;
+      }
+      h6 {
+        padding-top: 20px;
+        font-size: 30px;
+      }
+    }
+  }
+  //Small
+  @media screen and (max-width: $small) {
+      .center {
+        h5 {
+          font-size: 15px;
+        }
+        h6 {
+          padding-top: 10px;
+          font-size: 18px;
+      }
+    }
+  }
+}
+
+//Latest-Blog#
+#latest-blog {
+  width: 100%;
+  padding-top: 200px;
+  padding-bottom: 100px;
+  text-align: center;
+  //title
+  .title {
+    h6 {
+      font-size: 35px;
+      font-weight: bold;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -110px;
+        left: 0;
+        right: 0;
+        width: 2px;
+        height: 95px;
+        margin: 0 auto;
+        background-image: url("../img/before.png");
+        @include bg-size(cover);
+      }
+    }
+    p {
+      padding-top: 25px;
+      font-family: Poppins Light;
+      font-size: 16px;
+      line-height: 25px;
+    }
+    //M-Tablet
+    @media screen and (max-width: $m-tablet) {
+      h6 {
+        font-size: 20px;
+      }
+      p {
+        padding-top: 15px;
+        font-size: 14px;
+        line-height: 20px;
+        br {display: none}
+      }
+    }
+  }
+  //latest-blog-wrapper
+  .latest-blog-wrapper {
+    padding-top: 60px;
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    //blog-box
+    .blog-box {
+      width: 32%;
+      img {
+        width: 100%;
+        @include border-radius(5px 5px 0 0);
+      }
+      .blog-desc {
+        text-align: left;
+        background-color: $five-color;
+        padding: 20px;
+        @include border-radius(0 0 5px 5px);
+        margin-top: -2px;
+        .date {
+          font-size: 16px;
+          color: $base-color;
+        }
+        h6 {
+          padding-top: 15px;
+          line-height: 30px;
+          a {
+            font-family: Poppins Light;
+            font-size: 20px;
+            color: $base-color;
+            @include transition(0.3s);
+            &:hover {
+              color: $primary-color;
+            }
+          }
+        }
+        .read {
+          margin-top: 30px;
+          position: relative;
+          @include transition(0.3s);
+          span {
+            font-size: 16px;
+          }
+          i {
+            font-size: 25px;
+            position: absolute;
+            top: -5px;
+            left: 100px;
+          }
+          &:hover {
+            color: $primary-color;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      .blog-box {
+        width: 49%;
+        margin-bottom: 30px;
+      }
+    }
+    //Tablet
+    @media screen and (max-width: $tablet) {
+      .blog-box {
+        width: 100%;
+        .blog-desc {
+          text-align: center;
+          .date {font-size: 14px;}
+           h6 {
+             line-height: 18px;
+            a {font-size: $size;}
+          }
+          .read {
+            margin-top: 10px;
+            padding-bottom: 20px;
+            span {font-size: 14px}
+            i {
+              font-size: 18px;
+              left: 0;
+              right: 0;
+              top: 20px;
+              bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  //Notebook
+  @media screen and (max-width: $notebook) {
+    padding-top: 120px;
+    padding-bottom: 50px;
+  }
+}
+
+//Contact#
+#contact {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  //contact-wrapper
+  .contact-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    //contact-info
+    .contact-info {
+      width: 49%;
+      h6 {
+        font-size: 35px;
+        font-weight: bold;
+      }
+      p {
+        padding-top: 20px;
+        font-family: Poppins Light;
+        font-size: 16px;
+        line-height: 23px;
+      }
+      //contact-info
+      .contact-icon {
+        @include flex();
+        @include flex-direction(column);
+        .icon {
+          @include flex();
+          margin-top: 50px;
+          .icon-box {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            border: 1px solid $five-color;
+            text-align: center;
+            @include border-radius(50%);
+            i {font-size: 18px;}
+          }
+          .icon-desc {
+            padding-left: 25px;
+            h5 {
+              font-size: 16px;
+              color: #6b6b6b;
+            }
+            h6 {
+              padding-top: 5px;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+    //contact-form
+    .contact-form {
+      width: 49%;
+      h6 {
+        font-size: 35px;
+        font-weight: bold;
+      }
+      form {
+        input {
+          width: 45%;
+          margin-right: 20px;
+          background-color: transparent;
+          border: 1px solid $secondary-color;
+          color: $secondary-color;
+          margin-top: 30px;
+          padding: 15px;
+          @include border-radius(5px);
+        }
+        select {
+          width: 46%;
+          background-color: transparent;
+          border: 1px solid $secondary-color;
+          color: $secondary-color;
+          padding: 15px;
+          @include border-radius(5px);
+          margin-top: 50px;
+        }
+        textarea {
+          margin-top: 30px;
+          width: 100%;
+          background-color: transparent;
+          border: 1px solid $secondary-color;
+          color: $secondary-color;
+          padding: 15px;
+          @include border-radius(5px);
+        }
+        button {
+          margin-top: 30px;
+          background-color: $primary-color;
+          color: $base-color;
+          font-size: 18px;
+          @include border-radius(10px);
+          padding: 15px 30px;
+        }
+      }
+    }
+    //Large
+    @media screen and (max-width: $large) {
+      //contact-info
+      .contact-info {
+        p {
+          padding-top: 10px;
+          font-size: 14px;
+          line-height: 20px;
+          br {display: none;}
+        }
+      }
+      //contact-form
+      .contact-form {
+        form {
+          input {
+            width: 100%;
+            margin-right: 0;
+          }
+          select {
+            width: 100%;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+    //Notebook
+    @media screen and (max-width: $notebook) {
+      //contact-info
+      .contact-info {
+        width: 100%;
+        h6 {font-size: 28px;}
+        .contact-icon {
+          @include flex();
+          .icon {
+            margin-top: 50px;
+          }
+        }
+      }
+      //contact-form
+      .contact-form {
+        width: 100%;
+        margin-top: 70px;
+        h6 {font-size: 28px;}
+      }
+    }
+    //Mobil
+    @media screen and (max-width: $mobil) {
+      //contact-info
+      .contact-info {
+        width: 100%;
+        h6 {font-size: 18px;}
+          .contact-icon {
+            @include flex();
+            .icon {
+            margin-top: 30px;
+            @include flex();
+            @include flex-direction(column);
+            .icon-box {
+              width: 35px;
+              height: 35px;
+              line-height: 35px;
+              margin: 0 auto;
+              i {font-size: $size}
+            }
+            .icon-desc {
+              padding-top: 10px;
+              padding-left: 0;
+              text-align: center;
+              h5 {font-size: 13px}
+              h6 {font-size: 13px; padding-top: 5px;}
+            }
+          }
+        }
+      }
+      //contact-form
+        .contact-form {
+          h6 {font-size: 18px}
+        form {
+          button {
+            padding: 10px 20px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  //social
+  .social {
+    margin-top: -45px;
+    width: 45%;
+    background-color: $primary-color;
+    padding: 10px 20px;
+    text-align: center;
+    @include border-radius(0 10px 10px 0);
+    i {
+      font-size: 25px;
+      margin-right: 35px;
+    }
+  }
+  //copyright
+  .copyright {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 18px;
+    font-family: 'Poppins Light';
+  }
+  //Notebook
+  @media screen and (max-width: $notebook) {
+    .social {
+      margin-top: 40px;
+      width: 100%;
+    }
+    .copyright {font-size: 16px;}
+  }
+  //Mobil
+  @media screen and (max-width: $mobil) {
+    .social {
+      i {
+        font-size: 18px;
+        margin-right: 20px;
+      }
+    }
+    .copyright {font-size: 14px; padding-top: 30px;}
+  }
+}
+
+/////BLOG.HTML
+//Blog#
+#blog {
+  width: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #a1a2a3;
+}
