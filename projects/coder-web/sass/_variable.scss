@@ -1,66 +1,71 @@
-//Variable
+//Variable.scss
 
+//Variables
 $base-color: #fff;
 $primary-color: #FF4900;
-$secondary-color: #707070;
-$three-color: #8C8CA5;
-$four-color: #6B6B6B;
-$five-color: #333333;
-$six-color: #111111;
-$family: 'Poppins', sans-serif;
-$size: 15px;
+$secondary-color: #111111;
+$three-color: #000;
+$four-color: #8C8CA5;
+$five-color: #6B6B6B;
+$six-color: #707070;
+$seven-color: #060606;
+$family: 'Poppins';
+$size: 16px;
 
 //Media
-$x-large: 1400px;
-$large: 1200px;
-$notebook: 992px;
-$tablet: 766px;
-$m-tablet: 575px;
-$mobil: 480px;
-$small: 350px;
-$x-small: 250px;
-$x: 190px;
+$x-large:"screen and(max-width: 1400px)";
+$large:"screen and(max-width: 1200px)";
+$notebook:"screen and(max-width: 992px)";
+$tablet:"screen and(max-width: 768px)";
+$x-tablet:"screen and(max-width: 575px)";
+$mobil:"screen and(max-width: 480px)";
+$small:"screen and(max-width: 350px)";
+$x-small:"screen and(max-width: 250px)";
+$x:"screen and(max-width: 190px)";
 
-//Responsive
-.responsive {
-    max-width: 100%;
-    height: auto;
+//Mobil-İmg
+.mobil-img {
+  max-width: 100%;
+  height: auto;
 }
 
 //Container
 .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .container-fluid {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
-  
+
 @media (min-width: 576px) {
-    .container {
-      max-width: 540px;
-    }
-} 
+  .container {
+    max-width: 540px;
+  }
+}
+
 @media (min-width: 768px) {
-    .container {
-      max-width: 720px;
-    }
-} 
+  .container {
+    max-width: 720px;
+  }
+}
+
 @media (min-width: 992px) {
-    .container {
-      max-width: 960px;
-    }
-} 
+  .container {
+    max-width: 960px;
+  }
+}
+
 @media (min-width: 1200px) {
-    .container {
-      max-width: 1140px;
-    }
+  .container {
+    max-width: 1140px;
+  }
 }

@@ -1,16 +1,21 @@
 //JS
 
+//Lazy-Load
+var lazyLoadInstance = new LazyLoad({
+    elements_selector: ".lazyload"
+});
+
 //Menu
 $(function(){
     $('.menu').slicknav();
 });
 
-//Progress-Bar
-(function($){
-    new WOW().init();
-})(jQuery);
+//Scroll-Down
+function scrollWin(x, y) {
+    window.scrollBy(x, y);
+};
 
-//Counter-Box
+//Projects-Counter
 $('.count').each(function () {
     $(this).prop('Counter',0).animate({
         Counter: $(this).text()
@@ -23,26 +28,21 @@ $('.count').each(function () {
     });
 });
 
-//Project-Tab
-$(".project-tab").pTab({
+//Projects-tab
+$(".projects-tab").pTab({
     pTab: '.tab-list',
     pTabElem: 'li',
     pContent: '.tab-content'
 });
 
-//Owl-Clients
-$('.owl-clients').owlCarousel({
+//Clients-Owl
+$('.clients-owl').owlCarousel({
     loop:true,
-    margin:10,
-    autoplay:true,
+    margin:5,
     nav:false,
-    merge:true,
     dots:true,
     responsive:{
         0:{
-            items:1
-        },
-        300:{
             items:1
         },
         600:{
@@ -55,4 +55,36 @@ $('.owl-clients').owlCarousel({
             items:1
         }
     }
-})
+});
+
+//Form-Validation
+$(document).ready(function() {
+    $('#submit').click(function() {
+        isim=$('#isim').val();
+        email=$('#email').val();
+        tel=$('#tel').val();
+        messaage=$('#message').val();
+        uyari="";
+        //İsim
+        if(isim=="") {
+            uyari+="İsim Alanı boş olamaz";
+        }
+        else if(isim.length<3) {
+            uyari+="İsim Alanı 3 Karakterden az olamaz";
+        }
+        //Email
+        if(email=="") {
+            uyari+="Email Alanı boş olamaz";
+        }
+        else if(email.length<3) {
+            uyari+="Email Alanı 7 Karakterden az olamaz";
+        }
+        //Tel
+        if(tel.length!=11) {
+            uyari+="Telefon numaranız 11 haneli olmalıdır.";
+        }
+
+        $('.uyari').text(uyari);
+
+    });
+});

@@ -230,7 +230,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endCo
           transform-origin: $origin;
 }
 
-//Size
+//Bg-Size
 @mixin bg-size($bg-size) {
   -webkit-background-size: $bg-size;
      -moz-background-size: $bg-size;
