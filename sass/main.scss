@@ -1,0 +1,2558 @@
+/*Bu Tasarım Emrah Kahraman tarafından kodlanmıstır.*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "_font.scss";
+@import "_variable.scss";
+@import "_mixins.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $base-color;
+  width: 100%;
+  font-size: $size;
+  font-family: $one-family, $two-family;
+  color: $three-color;
+}
+
+//Header#
+#header {
+  width: 100%;
+  background-color: $base-color;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  @include box-shadow2(0px, 3px, 10px, 0px, rgba(0,0,0,0.36));
+  border-top: 7px solid $primary-color;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  //header-wrapper
+  .header-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    position: relative;
+    //logo
+    .logo {
+      position: relative;
+      z-index: 3;
+      img {
+        cursor: pointer;
+        @include transition(0.3s);
+        &:hover {
+          @include scale(1.1);
+        }
+      }
+    }
+    //menu
+    .menu {
+      li {
+        display: inline-block;
+        margin-right: 30px;
+        &:last-child {
+          margin-right: 0;
+        }
+        a {
+          color: $secondary-color;
+          @include weight(semi-bold);
+          font-family: $one-family;
+          position: relative;
+          &::before {
+            position: absolute;
+            width: 0;
+            margin: -5px 0;
+            @include transition(0.4s);
+            content: "";
+            background-color: $primary-color;
+            height: 4px;
+            border-radius: 2px;
+            left: 0;
+            bottom: 0;
+          }
+          &:hover {
+            &::before {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    //hamburger
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 74px;
+      right: 15px;
+      cursor: pointer;
+      z-index: 999;
+      i {
+        color: $secondary-color;
+        font-size: 30px;
+        cursor: pointer;
+        @include transition(0.4s);
+      }
+    }
+    //Notebook
+    @include notebook {
+      .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: $base-color;
+        z-index: 2;
+        text-align: center;
+        @include flex();
+        @include flex-direction(column);
+        @include justify-content(center);
+        @include scale(0);
+        opacity: 0;
+        transition: opacity 650ms;
+        li {
+          display: block;
+          margin-right: 0;
+          padding-bottom: 20px;
+          &:last-child {
+            padding-bottom: 0;
+          }
+          a {
+            font-size: 18px;
+            @include weight(bold);
+            color: $secondary-color;
+            &::before {
+              background-color: $primary-color;
+            }
+          }
+        }
+      }
+      .menu.open {
+        opacity: 1;
+        @include scale(1);
+      }
+      .hamburger {
+        display: block;
+        .fa-times {display: none;}
+        .fa-times.open {display: block;}
+        .fa-bars.open {display: none;}
+      }
+    }
+  }
+}
+
+//Home-Slider#
+#home-slider {
+  width: 100%;
+  //home-slider-owl
+  .home-slider-owl {
+    position: relative;
+    //item
+    .item {
+      position: relative;
+      .overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include translate(-50%, -50%);
+        color: $base-color;
+        h5 {
+          font-size: 40px;
+          @include weight(semi-bold);
+          text-transform: uppercase;
+          font-family: $one-family;
+        }
+        p {
+          padding-top: 15px;
+          letter-spacing: 0.6px;
+          line-height: 20px;
+          font-family: $two-family;
+        }
+        button {
+          margin-top: 20px;
+          background-color: $primary-color;
+          color: $base-color;
+          @include weight(bold);
+          text-transform: uppercase;
+          cursor: pointer;
+          padding: 15px 30px;
+          @include border-radius(3px);
+          font-family: $one-family;
+          @include transition(0.3s);
+          @include skewX(-20deg);
+          span {
+            @include skewX(20deg);
+          }
+        }
+      }
+      //Notebook
+      @include notebook {
+        .overlay {
+          h5 {font-size: 25px;}
+          p {font-size: 13px; padding-top: 10px;}
+          button {margin-top: 10px;}
+        }
+      }
+      //Tablet
+      @include tablet {
+        .overlay {
+          h5 {font-size: 19px;}
+          p {font-size: 12px; letter-spacing: normal; line-height: normal;}
+          button {margin-top: 10px; padding: 10px 20px; font-size: 12px;}
+        }
+      }
+      //X-Tablet
+      @include x-tablet {
+        .overlay {
+          h5 {font-size: $size;}
+          p {font-size: 10px; padding-top: 5px;}
+          button {font-size: 10px; margin-top: 5px;}
+        }
+      }
+      //Mobil
+      @include mobil {
+        .overlay {display: none;}
+      }
+    }
+    //owl-dots
+    .owl-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      .owl-dot {
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: $three-color;
+          @include transition(0.4s);
+        }
+      }
+      .active {
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: transparent;
+          border: 1px solid $primary-color;
+          @include transition(0.4s);
+          position: relative;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include translate(-50%, -50%);
+            width: 5px;
+            height: 5px;
+            text-align: center;
+            background-color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+//Home-Services#
+#home-services {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  text-align: center;
+  //title
+  .title {
+    text-align: left;
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //home-services-owl
+  .home-services-owl {
+    padding-top: 60px;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 70%;
+      left: -100px;
+      width: 197px;
+      height: 196px;
+      background-image: url(../img/after.png);
+      @include bg-size(cover);
+    }
+    //item
+    .item {
+      position: relative;
+      overflow: hidden;
+      img {
+        width: 100%;
+        @include transition(0.3s);
+      }
+      .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 50%;
+        padding-top: 40px;
+        color: $base-color;
+        background-color: rgba(235,92,25,0.65);
+        @include transition(0.3s);
+        cursor: pointer;
+        text-align: center;
+        h5 {
+          text-transform: uppercase;
+          font-family: $one-family;
+          font-size: 22px;
+        }
+        P {
+          padding-top: 7px;
+          font-size: 14px;
+          font-family: $two-family;
+        }
+        button {
+          margin-top: 10px;
+          background-color: $secondary-color;
+          color: $base-color;
+          padding: 10px 20px;
+          text-transform: uppercase;
+          cursor: pointer;
+        }
+      }
+      &:hover .overlay {
+        bottom: 0;
+      }
+      .overlay {
+        bottom: 100%;
+      }
+      &:hover {
+        img {
+          @include scale(1.1);
+        }
+      }
+      //Notebook
+      @include notebook {
+        .overlay {
+          padding-top: 65px;
+          h5 {font-size: 18px;}
+          p {font-size: 13px;}
+        }
+      }
+      //Tablet
+      @include tablet {
+        .overlay {
+          padding-top: 35px;
+          h5 {font-size: $size;}
+          p {font-size: 11px;}
+          button {font-size: 13px;}
+        }
+      }
+      //X-Tablet
+      @include x-tablet {
+        .overlay {
+          padding-top: 110px;
+          h5 {font-size: $size;}
+          p {font-size: 11px;}
+          button {font-size: 13px;}
+        }
+      }
+      //Mobil
+      @include mobil {
+        .overlay {
+          padding-top: 90px;
+        }
+      }
+      //Small
+      @include small {
+        .overlay {
+            padding-top: 55px;
+        }
+      }
+      //X-Small
+      @include x-small {
+        .overlay {
+          padding-top: 25px;
+          h5 {font-size: 12px;}
+          p {font-size: 10px;}
+          button {
+            padding: 5px 10px;
+            font-size: 10px;
+          }
+        }
+      }
+      //X
+      @include x {
+        .overlay {
+          padding-top: 10px;
+          h5 {font-size: 10px;}
+          p {font-size: 10px; padding-top: 5px;}
+          button {
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+    //owl-nav
+    .owl-nav {
+      position: absolute;
+      top: 7px;
+      right: 0;
+      .owl-prev, .owl-next {
+        width: 30px;
+        height: 30px;
+        background-color: $secondary-color;
+        color: $base-color;
+      }
+    }
+    //owl-dots
+    .owl-dots {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      right: 0;
+      .owl-dot {
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: $three-color;
+          @include transition(0.4s);
+        }
+      }
+      .active {
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: transparent;
+          border: 1px solid $primary-color;
+          @include transition(0.4s);
+          position: relative;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include translate(-50%, -50%);
+            width: 5px;
+            height: 5px;
+            text-align: center;
+            background-color: $primary-color;
+          }
+        }
+      }
+      //206
+      @media screen and(max-width: 206px) {
+        bottom: -40px;
+        .owl-dot {
+          span {
+            margin: 0 3px
+          }
+        }
+      }
+    }
+  }
+}
+
+//Home-About#
+#home-about {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  //home-about-wrapper
+  .home-about-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    //home-about-img
+    .home-about-img {
+      width: 50%;
+      padding: 0 15px 0 15px;
+      img {width: 100%}
+    }
+    //home-about-text
+    .home-about-text {
+      width: 50%;
+      padding: 0 15px 0 15px;
+      h5 {
+        font-size: 35px;
+        @include weight(semi-bold);
+        line-height: 40px;
+        font-family: $one-family;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          width: 15%;
+          height: 3px;
+          background-color: $secondary-color;
+        }
+      }
+      p {
+        padding-top: 30px;
+        line-height: 22px;
+        font-size: 14px;
+        letter-spacing: 0.4px;
+      }
+      button {
+        margin-top: 18px;
+        background-color: $primary-color;
+        color: $base-color;
+        text-transform: uppercase;
+        @include weight(semi-bold);
+        cursor: pointer;
+        padding: 10px 20px;
+        font-size: 12px;
+        @include transition(0.3s);
+        @include skewX(-20deg);
+        span {
+          @include skewX(20deg);
+        }
+      }
+    }
+    //Notebook
+    @include notebook {
+      //home-about-img
+      .home-about-img {
+        width: 100%;
+      }
+      //home-about-text
+      .home-about-text {
+        margin-top: 20px;
+        width: 100%;
+        h5 {font-size: 25px; line-height: 25px;}
+        p {font-size: 13px; padding-top: 25px;}
+      }
+    }
+    //Mobil
+    @include mobil {
+      .home-about-text {
+        h5 {
+          font-size: 18px; line-height: 20px; letter-spacing: normal;
+          br {display: none;}
+        }
+        p {font-size: 12px;}
+      }
+    }
+    //X-Small
+    @include x-small {
+      .home-about-text {
+        h5 {font-size: $size;}
+        button {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+//Home-Projects#
+#home-projects {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  text-align: center;
+  //title
+  .title {
+    text-align: left;
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //home-projects-owl
+  .home-projects-owl {
+    padding-top: 60px;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -110px;
+      width: 215px;
+      height: 239px;
+      background-image: url(../img/before.png);
+      @include bg-size(cover);
+    }
+    //item
+    .item {
+      text-align: left;
+      h5 {
+        font-family: $one-family;
+        padding-top: 15px;
+        text-transform: uppercase;
+        color: $three-color;
+        @include weight(bold);
+        font-size: 20px;
+      }
+      h6 {
+        padding-top: 10px;
+        font-family: $one-family;
+        color: $primary-color;
+        font-size: 16px;
+      }
+      p {
+        padding-top: 10px;
+        line-height: 20px;
+        letter-spacing: 0.4px;
+        font-family: $two-family;
+      }
+      button {
+        margin: 15px 0 0 5px;
+        padding: 10px 50px;
+        text-transform: uppercase;
+        @include weight(bold);
+        background-color: $primary-color;
+        color: $base-color;
+        @include transition(0.3s);
+        @include skewX(-20deg);
+        cursor: pointer;
+        span {
+          @include transition(0.3s);
+          @include skewX(20deg);
+        }
+      }
+      //X-Small
+      @include x-small {
+        h5 {font-size: $size;}
+        h6 {font-size: 14px;}
+        p {font-size: 13px;}
+        button {
+          margin: 15px 0 0 0;
+        }
+      }
+    }
+    //owl-nav
+    .owl-nav {
+      .owl-prev, .owl-next {
+        position: absolute;
+        top: 12px;
+        right: -5px;
+        display: block;
+        width: 40px;
+        height: 40px;
+        background-color: $secondary-color;
+        color: $base-color;
+      }
+      .owl-prev {
+        margin-right: 50px;
+      }
+    }
+  }
+  .read {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px 50px;
+    text-transform: uppercase;
+    @include weight(bold);
+    background-color: $primary-color;
+    color: $base-color;
+    @include transition(0.3s);
+    @include skewX(-20deg);
+    cursor: pointer;
+    span {
+      @include transition(0.3s);
+      @include skewX(20deg);
+    }
+    //X-Small
+    @include x-small {
+      padding: 10px 20px;
+      font-size: 10px;
+    }
+  }
+}
+
+//Home-Statement#
+#home-statement {
+  width: 100%;
+  height: 400px;
+  background-image: url(../img/home-statement-bg.jpg);
+  @include bg-size(cover);
+  position: relative;
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    text-align: center;
+    color: $base-color;
+    @include weight(semi-bold);
+    font-family: $one-family;
+    text-transform: uppercase;
+    font-size: 40px;
+    letter-spacing: 1px;
+    //Tablet
+    @include tablet {
+      font-size: 20px;
+    }
+    //665px
+    @media screen and(max-width: 665px){
+      line-height: 25px;
+    }
+  }
+}
+
+//Home-Blog#
+#home-blog {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  text-align: center;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 40%;
+    right: 0;
+    width: 197px;
+    height: 196px;
+    background-image: url(../img/after.png);
+    @include bg-size(cover);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 215px;
+    height: 245px;
+    background-image: url(../img/before.png);
+    @include bg-size(cover);
+  }
+  //title
+  .title {
+    text-align: left;
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //home-blog-wrapper
+  .home-blog-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    padding-top: 50px;
+    text-align: left;
+    //home-blog-item
+    .home-blog-item {
+      width: 33.3%;
+      padding: 0 15px 0 15px;
+      img {width: 100%}
+      h5 {
+        padding-top: 15px;
+        a {
+          text-transform: uppercase;
+          font-size: 18px;
+          letter-spacing: 0.4px;
+          color: $secondary-color;
+          @include weight(bold);
+        }
+      }
+      p {
+        line-height: 20px;
+        letter-spacing: 0.3px;
+        padding-top: 10px;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px 30px;
+        text-transform: uppercase;
+        @include weight(bold);
+        background-color: $primary-color;
+        color: $base-color;
+        @include transition(0.3s);
+        @include skewX(-20deg);
+        cursor: pointer;
+        span {
+          @include transition(0.3s);
+          @include skewX(20deg);
+        }
+      }
+    }
+    //Notebook
+    @include notebook {
+      .home-blog-item {
+        width: 50%;
+        margin-bottom: 30px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    //Tablet
+    @include tablet {
+      .home-blog-item {
+        width: 100%;
+        h5 {
+          a {font-size: $size;}
+        }
+        p {
+          font-size: 13px;
+          letter-spacing: normal;
+        }
+        button {
+          padding: 10px 20px;
+          font-size: 12px;
+        }
+      }
+    }
+    //305
+    @media screen and(max-width: 305px) {
+      .home-blog-item {
+        h5 {
+          a {font-size: 12px;}
+        }
+      }
+    }
+  }
+  button {
+    margin-top: 40px;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    @include weight(bold);
+    background-color: $primary-color;
+    color: $base-color;
+    @include transition(0.3s);
+    @include skewX(-20deg);
+    cursor: pointer;
+    span {
+      @include transition(0.3s);
+      @include skewX(20deg);
+    }
+    //X-Small
+    @include x-small {
+      padding: 10px 20px;
+      font-size: 10px;
+    }
+  }
+  //Tablet
+  @include tablet {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 5%;
+      left: 0;
+      width: 125px;
+      height: 140px;
+      background-image: url(../img/before.png);
+      @include bg-size(cover);
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 40%;
+      right: 0;
+      width: 117px;
+      height: 116px;
+      background-image: url(../img/after.png);
+      @include bg-size(cover);
+    }
+  }
+}
+
+//Footer#
+#footer {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  background-color: $secondary-color;
+  //center
+  .center {
+    text-align: center;
+    .social {
+      padding-top: 20px;
+      i {
+        color: $base-color;
+        @include transition(0.3s);
+        cursor: pointer;
+        margin-right: 20px;
+        &:last-child {
+          margin-right: 0;
+        }
+        &:hover {
+          @include translate(0, -10px);
+        }
+      }
+    }
+    p {
+      padding-top: 20px;
+      color: $base-color;
+      font-size: 13px;
+    }
+    //Small
+    @include small {
+      .social {
+        i {
+          margin-right: 5px;
+        }
+      }
+      p {line-height: 20px; font-size: 12px;}
+    }
+  }
+}
+
+
+/////ABOUT.HTML
+//About-Page#
+#about-page {
+  width: 100%;
+  height: 400px;
+  background-image: url(../img/about-bg.jpg);
+  @include bg-size(cover);
+  background-position: center;
+  position: relative;
+  h6 {
+    color: $base-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    text-transform: uppercase;
+    @include weight(bold);
+    letter-spacing: 1px;
+    font-size: 40px;
+    font-family: $one-family;
+  }
+}
+
+//About-İnfo#
+#about-info {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  //about-info-wrapper
+  .about-info-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    @include align-items(center);
+    //about-info-text
+    .about-info-text {
+      width: 50%;
+      padding: 0 15px 0 15px;
+      h5 {
+        font-family: $one-family;
+        font-size: 30px;
+        @include weight(semi-bold);
+        text-transform: uppercase;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          width: 20%;
+          height: 3px;
+          background-color: $primary-color;
+        }
+      }
+      p {
+        padding-top: 30px;
+        font-family: $two-family;
+        line-height: 25px;
+        letter-spacing: 0.4px;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px 30px;
+        text-transform: uppercase;
+        @include weight(bold);
+        background-color: $primary-color;
+        color: $base-color;
+        @include transition(0.3s);
+        @include skewX(-20deg);
+        cursor: pointer;
+        span {
+          @include transition(0.3s);
+          @include skewX(20deg);
+        }
+      }
+    }
+    //about-info-img
+    .about-info-img {
+      width: 50%;
+      padding: 0 15px 0 15px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -85px;
+        width: 197px;
+        height: 196px;
+        z-index: -1;
+        background-image: url(../img/after.png);
+        @include bg-size(cover);
+      }
+      img {width: 100%}
+    }
+    //Notebook
+    @include notebook {
+      //about-info-text
+      .about-info-text {
+        width: 100%;
+      }
+      //about-info-img
+      .about-info-img {
+        margin-top: 30px;
+        width: 100%;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -85px;
+          width: 197px;
+          height: 196px;
+          z-index: -1;
+          background-image: url(../img/after.png);
+          @include bg-size(cover);
+          @include rotate(180deg);
+        }
+      }
+    }
+    //Mobil
+    @include mobil {
+      .about-info-text {
+        h5 {
+          font-size: 20px;
+        }
+        p {
+          padding-top: 25px;
+          font-size: 13px;
+          letter-spacing: normal;
+          line-height: 20px;
+        }
+        button {
+          padding: 10px 15px; font-size: 10px;
+        }
+      }
+      .about-info-img {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -30px;
+          width: 107px;
+          height: 106px;
+          background-image: url(../img/after.png);
+          @include bg-size(cover);
+          @include rotate(180deg);
+        }
+      }
+    }
+  }
+}
+
+//About-Team#
+#about-team {
+  width: 100%;
+  padding: 60px 0 60px;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 125px;
+    height: 140px;
+    background-image: url(../img/before.png);
+    @include bg-size(cover);
+  }
+  //title
+  .title {
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //about-team-wrapper
+  .about-team-wrapper {
+    padding-top: 40px;
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    text-align: center;
+    //team-item
+    .team-item {
+      width: 25%;
+      padding: 0 15px 0 15px;
+      img {width: 100%}
+      h4 {
+        padding-top: 10px;
+        text-transform: uppercase;
+        color: $secondary-color;
+        font-size: 18px;
+        @include weight(semi-bold);
+        font-family: $two-family;
+      }
+      h5 {
+        padding-top: 10px;
+        font-family: $one-family;
+        color: $primary-color;
+        @include weight(semi-bold);
+        font-size: $size;
+      }
+      .social {
+        padding-top: 15px;
+        i {
+          color: $three-color;
+          @include transition(0.3s);
+          cursor: pointer;
+          margin-right: 7px;
+          &:last-child {
+            margin-right: 0;
+          }
+          &:hover {
+            @include translate(0, -10px);
+            color: $primary-color;
+          }
+        }
+      }
+    }
+    //Notebook
+    @include notebook {
+      .team-item {
+        width: 33.3%;
+        margin-bottom: 30px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        h4 {font-size: 16px;}
+        h5 {font-size: 13px;}
+      }
+    }
+    //Tablet
+    @include tablet {
+      .team-item {
+        width: 50%;
+        .social {
+          i {margin-right: 4px;}
+        }
+      }
+    }
+    //X-Tablet
+    @include x-tablet {
+      .team-item {
+        width: 100%;
+      }
+    }
+  }
+}
+
+//About-Counter#
+#about-counter {
+  width: 100%;
+  padding: 50px 0 50px 0;
+  background-color: $primary-color;
+  //about-counter-wrapper
+  .about-counter-wrapper {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    text-align: center;
+    .counter-item {
+      width: 25%;
+      color: $base-color;
+      .count {
+        font-size: 50px;
+      }
+      h6 {
+        font-size: 20px;
+        @include weight(semi-bold);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding-top: 10px;
+      }
+    }
+    //Notebook
+    @include notebook {
+      .counter-item {
+        width: 33.3%;
+        margin-bottom: 30px;
+      }
+    }
+    //Tablet
+    @include tablet {
+      .counter-item {
+        width: 50%;
+      }
+    }
+    //X-Tablet
+    @include x-tablet {
+      .counter-item {
+        width: 100%;
+        .count {font-size: 30px;}
+        h6 {font-size: 18px;}
+      }
+    }
+  }
+  //Notebook
+  @include notebook {
+    padding: 50px 0 30px 0;
+  }
+}
+
+//About-Brands#
+#about-brands {
+  width: 100%;
+  padding: 60px 0 120px 0;
+  //title
+  .title {
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //about-brands-owl
+  .about-brands-owl {
+    padding-top: 50px;
+    position: relative;
+    //owl-dots
+    .owl-dots {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      .owl-dot {
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: $three-color;
+          @include transition(0.4s);
+        }
+      }
+      .active {
+        span {
+          width: 18px;
+          height: 18px;
+          background-color: transparent;
+          border: 1px solid $primary-color;
+          @include transition(0.4s);
+          position: relative;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include translate(-50%, -50%);
+            width: 5px;
+            height: 5px;
+            text-align: center;
+            background-color: $primary-color;
+          }
+        }
+      }
+      //206
+      @media screen and(max-width: 206px) {
+        bottom: -60px;
+        .owl-dot {
+          span {
+            margin: 0 3px
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/////SERVİCES.HTML
+//Services-Page#
+#services-page {
+  width: 100%;
+  height: 400px;
+  background-image: url(../img/services-bg.jpg);
+  @include bg-size(cover);
+  background-position: center;
+  position: relative;
+  h6 {
+    color: $base-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    text-transform: uppercase;
+    @include weight(bold);
+    letter-spacing: 1px;
+    font-size: 40px;
+    font-family: $one-family;
+  }
+  //Small
+  @include small {
+    h6 {font-size: 25px;}
+  }
+}
+
+//Our-Services#
+#our-services {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 0;
+    width: 125px;
+    height: 140px;
+    background-image: url(../img/before.png);
+    @include bg-size(cover);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 117px;
+    height: 116px;
+    background-image: url(../img/after.png);
+    @include bg-size(cover);
+  }
+  //title
+  .title {
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //our-services-wrapper
+  .our-services-wrapper {
+    padding-top: 50px;
+    //services-item
+    .services-item {
+      @include flex();
+      @include justify-content(space-between);
+      @include flex-wrap(wrap);
+      margin-bottom: 30px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .services-item-img {
+        width: 50%;
+        padding: 0 15px 0 15px;
+        position: relative;
+        img {width: 100%}
+      }
+      .services-item-desc {
+        width: 50%;
+        padding: 60px 15px 60px 15px;
+        border: 1px solid #a1a2a3;
+        h5 {
+          text-transform: uppercase;
+          font-size: 35px;
+          font-family: $one-family;
+        }
+        p {
+          padding-top: 20px;
+          font-family: $two-family;
+          line-height: 25px;
+          letter-spacing: 0.3px;
+        }
+      }
+    }
+    //Notebook
+    @include notebook {
+      .services-item {
+        @include flex();
+        @include flex-direction(column);
+        .services-item-img {
+          width: 100%;
+        }
+        .services-item-desc {
+          width: 100%;
+          margin-top: 15px;
+          padding: 25px 15px 25px 15px;
+        }
+      }
+    }
+    //Tablet
+    @include tablet {
+      .services-item {
+        .services-item-desc {
+          h5 {font-size: 25px;}
+          p {padding-top: 15px; font-size: 13px;}
+        }
+      }
+    }
+    //Small
+    @include small {
+      .services-item {
+        .services-item-desc {
+          h5 {font-size: 18px;}
+          p {padding-top: 10px; font-size: 12px; line-height: 20px; letter-spacing: normal;}
+        }
+      }
+    }
+  }
+}
+
+
+/////PROJECTS.HTML
+//Projects-Page#
+#projects-page {
+  width: 100%;
+  height: 400px;
+  background-image: url(../img/projects-bg.jpg);
+  @include bg-size(cover);
+  background-position: center;
+  position: relative;
+  h6 {
+    color: $base-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    text-transform: uppercase;
+    @include weight(bold);
+    letter-spacing: 1px;
+    font-size: 40px;
+    font-family: $one-family;
+  }
+  //Small
+  @include small {
+    h6 {font-size: 25px;}
+  }
+}
+
+//Our-Projects#
+#our-projects {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 125px;
+    height: 140px;
+    background-image: url(../img/before.png);
+    @include bg-size(cover);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    right: 0;
+    width: 117px;
+    height: 116px;
+    background-image: url(../img/after.png);
+    @include bg-size(cover);
+  }
+  //title
+  .title {
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //our-projects-wrapper
+  .our-projects-wrapper {
+    padding-top: 50px;
+    //projects-item
+    .projects-item {
+      @include flex();
+      @include justify-content(space-between);
+      @include align-items(center);
+      @include flex-wrap(wrap);
+      background-color: #eee;
+      margin-bottom: 40px;
+      //projects-item-img
+      .projects-item-img {
+        width: 50%;
+        position: relative;
+        img {width: 100%}
+      }
+      //projects-item-desc
+      .projects-item-desc {
+        width: 50%;
+        padding-left: 40px;
+        h3 {
+          color: #aaa;
+          font-size: 50px;
+          @include weight(semi-bold);
+          letter-spacing: 1px;
+          padding-left: 10px;
+          position: relative;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 27px;
+            left: 80px;
+            width: 10%;
+            height: 2px;
+            background-color: $primary-color;
+          }
+        }
+        h4 {
+          padding-top: 10px;
+          a {
+            @include weight(bold);
+            font-size: 22px;
+            color: $three-color;
+            position: relative;
+            z-index: 1;
+            padding: 5px 10px 5px 10px;
+            &::after {
+              position: absolute;
+              width: 0;
+              @include transition(0.4s);
+              content: "";
+              background-color: $primary-color;
+              height: 100%;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              z-index: -9999;
+            }
+            &:hover {
+              color: $base-color;
+              &::after {
+                width: 100%;
+              }
+            }
+          }
+        }
+        h5 {
+          padding: 10px 0 0 10px;
+          color: $secondary-color;
+        }
+        button {
+          margin: 15px 0 0 10px;
+          padding: 10px 30px;
+          text-transform: uppercase;
+          @include weight(bold);
+          background-color: $primary-color;
+          color: $base-color;
+          @include transition(0.3s);
+          @include skewX(-20deg);
+          font-size: 13px;
+          cursor: pointer;
+          span {
+            @include transition(0.3s);
+            @include skewX(20deg);
+          }
+        }
+      }
+      //Notebook
+      @include notebook {
+        @include flex();
+        @include flex-direction(column);
+        //projects-item-img
+        .projects-item-img {
+          width: 100%;
+        }
+        //projects-item-desc
+        .projects-item-desc {
+          width: 100%;
+          text-align: center;
+          padding: 30px 0 30px 0;
+          h3 {
+            padding-left: 0;
+            &::before {
+              left: 44.5%;
+            }
+          }
+          h4 {padding-top: 15px;}
+          h5 {padding: 17px 0 0 0;}
+          button {margin: 15px 0 0 0;}
+        }
+      }
+      //Mobil
+      @include mobil {
+        //projects-item-desc
+        .projects-item-desc {
+          h3 {
+            font-size: 30px;
+            &::before {
+              top: 31px;
+            }
+          }
+          h4 {
+            a {font-size: 18px;}
+          }
+          h5 {font-size: 13px;}
+          button {padding: 10px 20px;}
+        }
+      }
+      //Small
+      @include small {
+        //projects-item-desc
+        .projects-item-desc {
+          h4 {
+            a {font-size: 12px;}
+          }
+          h5 {font-size: 10px;}
+          button {font-size: 10px;}
+        }
+      }
+      //X-Small
+      @include x-small {
+        //projects-item-desc
+        .projects-item-desc {
+          h4 {
+            a {font-size: 8px;}
+          }
+          h5 {font-size: 8px;}
+          button {font-size: 10px;}
+        }
+      }
+    }
+  }
+  //page
+  .page {
+    text-align: center;
+    padding-top: 20px;
+    li {
+      display: inline-block;
+      margin-right: 6px;
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: $base-color;
+        @include weight(bold);
+        font-size: 16px;
+        background-color: $primary-color;
+        @include border-radius(5px);
+        @include transition(0.4s);
+        &:hover {
+          background-color: $secondary-color;
+        }
+      }
+    }
+    //Small
+    @include small {
+      li {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+
+/////BLOG.HTML
+//Blog-Page#
+#blog-page {
+  width: 100%;
+  height: 400px;
+  background-image: url(../img/blog-bg.jpg);
+  @include bg-size(cover);
+  background-position: center;
+  position: relative;
+  h6 {
+    color: $base-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    text-transform: uppercase;
+    @include weight(bold);
+    letter-spacing: 1px;
+    font-size: 40px;
+    font-family: $one-family;
+  }
+  //Small
+  @include small {
+    h6 {font-size: 25px;}
+  }
+}
+
+//Blog#
+#blog {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  //title
+  .title {
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //blog-wrapper
+  .blog-wrapper {
+    padding-top: 10px;
+    @include flex();
+    @include justify-content(space-between);
+    @include flex-wrap(wrap);
+    //post
+    .post {
+      width: 50%;
+      padding: 0 15px 0 15px;
+      margin-top: 50px;
+      position: relative;
+      img {width: 100%;}
+      .category {
+        position: absolute;
+        top: 8px;
+        left: 24px;
+        background-color: $primary-color;
+        @include weight(semi-bold);
+        padding: 10px 20px;
+        color: $base-color;
+        cursor: pointer;
+      }
+      h5 {
+        padding-top: 10px;
+        a {
+          color: $secondary-color;
+          font-size: 22px;
+          @include weight(bold);
+          letter-spacing: 0.6px;
+          @include transition(0.4s);
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+      //desc-flex
+      .desc-flex {
+        @include flex();
+        padding-top: 15px;
+        color: $three-color;
+        @include weight(semi-bold);
+        .author {
+          padding-right: 25px;
+          font-family: $two-family;
+          i {
+            color: $primary-color;
+            padding-right: 7px;
+            span {font-family: $two-family;}
+          }
+        }
+        .date {
+          font-family: $two-family;
+          i {
+            color: $primary-color;
+            padding-right: 7px;
+            span {font-family: $two-family;}
+          }
+        }
+      }
+      p {
+        padding-top: 20px;
+        font-size: $size;
+        line-height: 20px;
+        letter-spacing: 0.4px;
+      }
+      button {
+        margin: 20px 0 0 0;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        @include weight(bold);
+        background-color: $primary-color;
+        color: $base-color;
+        @include skewX(-20deg);
+        font-size: 13px;
+        cursor: pointer;
+        span {
+          @include transition(0.3s);
+          @include skewX(20deg);
+        }
+      }
+    }
+    //Tablet
+    @include tablet {
+      .post {
+        width: 100%;
+        h5 {
+          a {font-size: 20px;}
+        }
+      }
+    }
+    //Mobil
+    @include mobil {
+      .post {
+        .category {
+          top: 4px;
+          left: 20px;
+          padding: 5px 10px;
+          font-size: 12px;
+        }
+        h5 {
+          a {font-size: $size;}
+        }
+        .desc-flex {
+          padding-top: 13px;
+          @include flex();
+          @include flex-direction(column);
+          .author {
+            padding-right: 0;
+            padding-bottom: 5px;
+          }
+        }
+      }
+    }
+    //330px
+    @media screen and(max-width: 316px) {
+      .post {
+        h5 {
+          line-height: 18px;
+          a {font-size: 13px; letter-spacing: normal;}
+        }
+        p {font-size: 13px;}
+      }
+    }
+  }
+  //page
+  .page {
+    padding-top: 50px;
+    li {
+      display: inline-block;
+      margin-right: 6px;
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: $base-color;
+        @include weight(bold);
+        font-size: 16px;
+        background-color: $primary-color;
+        @include border-radius(5px);
+        @include transition(0.4s);
+        &:hover {
+          background-color: $secondary-color;
+        }
+      }
+    }
+    //310px
+    @media screen and(max-width: 308px) {
+      li {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+
+/////BLOG-SİNGLE.HTML
+//Single-Wrapper
+.single-wrapper {
+  @include flex();
+  @include justify-content(space-between);
+  @include flex-wrap(wrap);
+  //post-,sngle
+  .post-single {
+    width: 75%;
+    padding: 0 15px 0 0;
+    position: relative;
+    img {width: 100%;}
+    .category {
+      position: absolute;
+      top: 5px;
+      left: 8px;
+      background-color: $primary-color;
+      @include weight(semi-bold);
+      padding: 10px 20px;
+      color: $base-color;
+      cursor: pointer;
+    }
+    h5 {
+      padding-top: 15px;
+      color: $secondary-color;
+      font-size: 22px;
+      @include weight(bold);
+      letter-spacing: 0.6px;
+    }
+    //desc-flex
+    .desc-flex {
+      @include flex();
+      padding-top: 20px;
+      color: $three-color;
+      @include weight(semi-bold);
+      .author {
+        padding-right: 25px;
+        font-family: $two-family;
+        i {
+          color: $primary-color;
+          padding-right: 7px;
+          span {font-family: $two-family;}
+        }
+      }
+      .date {
+        font-family: $two-family;
+        i {
+          color: $primary-color;
+          padding-right: 7px;
+          span {font-family: $two-family;}
+        }
+      }
+    }
+    p {
+      padding-top: 25px;
+      font-size: $size;
+      line-height: 25px;
+      letter-spacing: 0.4px;
+    }
+    //share
+    .share {
+      margin-top: 30px;
+      background-color: $primary-color;
+      padding: 15px 0 15px 25px;
+      i {
+        color: $base-color;
+        @include transition(0.3s);
+        cursor: pointer;
+        margin-right: 20px;
+        &:last-child {
+          margin-right: 0;
+        }
+        &:hover {
+          @include translate(0, -10px);
+        }
+      }
+    }
+    //form
+    form {
+      margin-top: 40px;
+      h4 {
+        margin-bottom: 30px;
+        @include weight(semi-bold);
+        font-size: 30px;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: -7px;
+          left: 0;
+          width: 15%;
+          height: 3px;
+          background-color: $three-color;
+        }
+      }
+      input {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid #eee;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+      textarea {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid #eee;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+      button {
+        width: 100%;
+        background-color: $primary-color;
+        color: $base-color;
+        cursor: pointer;
+        padding: 15px 30px;
+      }
+    }
+  }
+  //post-sidebar
+  .post-sidebar {
+    width: 25%;
+    padding: 0 0 0 15px;
+    //sidebar
+    .sidebar {
+      margin-bottom: 40px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      //search
+      .search {
+        position: relative;
+        input {
+          width: 100%;
+          border: 1px solid #eee;
+          padding: 15px;
+          font-family: $two-family;
+        }
+        i {
+          position: absolute;
+          top: 19px;
+          right: 20px;
+          color: #aaa;
+        }
+      }
+      //categories
+      .categories {
+        h5 {
+          text-transform: uppercase;
+          @include weight(semi-bold);
+          font-family: $one-family;
+        }
+        ul {
+          padding-top: 15px;
+          li {
+            padding-top: 7px;
+            padding-bottom: 7px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            a {
+              font-family: $two-family;
+              color: $three-color;
+              span {float: right; color: $primary-color;}
+              &:hover {
+                color: $primary-color;
+              }
+            }
+          }
+        }
+      }
+      //latest-post
+      .latest-post {
+        h5 {
+          text-transform: uppercase;
+          @include weight(semi-bold);
+          font-family: $one-family;
+        }
+        .latests {
+          padding-top: 15px;
+          @include flex();
+          @include flex-direction(column);
+          .latest {
+            @include flex();
+            @include align-items(center);
+            margin-bottom: 20px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            .desc {
+              padding-left: 10px;
+              img {width: 100%}
+              h6 {
+                padding-top: 5px;
+                a {
+                  color: $three-color;
+                  font-size: $size;
+                  letter-spacing: 1px;
+                  @include weight(semi-bold);
+                  font-family: $two-family;
+                }
+              }
+              .date {
+                padding-top: 2px;
+                color: $primary-color;
+                font-family: $one-family;
+                font-size: 13px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  //Notebook
+  @include notebook {
+    //post-single
+    .post-single {
+      width: 100%;
+      .share {
+        padding: 15px 0 15px 20px;
+        i {
+          font-size: 22px;
+        }
+      }
+    }
+    //post-sidebar
+    .post-sidebar {
+      margin-top: 40px;
+      width: 100%;
+      padding: 0 0 0 0;
+    }
+  }
+  //Mobil
+  @include mobil {
+    //post-single
+    .post-single {
+      h5 {font-size: 18px; letter-spacing: normal;}
+      p {font-size: 13px; line-height: 22px;}
+    }
+  }
+  //Small
+  @include small {
+    //post-single
+    .post-single {
+      .category {padding: 8px 17px; font-size: 12px;}
+      h5 {font-size: 13px;}
+      //desc-flex
+      .desc-flex {
+        @include flex();
+        @include flex-direction(column);
+        .author {
+          padding-right: 0;
+        }
+        .date {
+          padding-top: 5px;
+        }
+      }
+      //share
+      .share {
+        i {
+          font-size: $size;
+          margin-right: 10px;
+        }
+      }
+      //form
+      form {
+        h4 {font-size: 20px;}
+      }
+    }
+    //post-sidebar
+    .post-sidebar {
+      //sidebar
+      .sidebar {
+        //latest-post
+        .latest-post {
+          .latests {
+            .latest {
+              @include flex();
+              @include flex-direction(column);
+              img {width: 100%}
+              .desc {padding-left: 0;}
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/////CONTACT.HTML
+//Contact-Page#
+#contact-page {
+  width: 100%;
+  height: 400px;
+  background-image: url(../img/contact-bg.jpg);
+  @include bg-size(cover);
+  background-position: center center;
+  h6 {
+    color: $base-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include translate(-50%, -50%);
+    text-transform: uppercase;
+    @include weight(bold);
+    letter-spacing: 1px;
+    font-size: 40px;
+    font-family: $one-family;
+  }
+  //Small
+  @include small {
+    h6 {font-size: 25px;}
+  }
+}
+
+//Contact#
+#contact {
+  width: 100%;
+  padding: 60px 0 60px 0;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 125px;
+    height: 140px;
+    background-image: url(../img/before.png);
+    @include bg-size(cover);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    right: 0;
+    width: 117px;
+    height: 116px;
+    background-image: url(../img/after.png);
+    @include bg-size(cover);
+  }
+  //title
+  .title {
+    h6 {
+      padding: 15px 0 0 15px;
+      font-family: $one-family;
+      font-size: 40px;
+      color: $secondary-color;
+      @include weight(semi-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        border: 4px solid $primary-color;
+        border-right: 0;
+        border-bottom: 0;
+      }
+    }
+    p {
+      padding: 7px 0 0 15px;
+      font-family: $two-family;
+      font-size: $size;
+      line-height: 20px;
+      letter-spacing: 0.6px;
+      color: $three-color;
+    }
+    //Notebook
+    @include notebook {
+      h6 {font-size: 25px;}
+      p {font-size: 12px; line-height: 15px;}
+    }
+    //Small
+    @include small {
+      h6 {font-size: 18px;}
+      p {font-size: 10px; line-height: 14px;}
+    }
+  }
+  //contact-wrapper
+  .contact-wrapper {
+    padding-top: 50px;
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    //contact-map
+    .contact-map {
+      width: 50%;
+      padding: 0 15px 0 15px;
+    }
+    //contact-form
+    .contact-form {
+      width: 50%;
+      padding: 0 15px 0 15px;
+      form {
+        input {
+          width: 100%;
+          background-color: transparent;
+          border: 1px solid #aaa;
+          color: $three-color;
+          padding: 15px;
+          margin-bottom: 20px;
+        }
+        textarea {
+          width: 100%;
+          background-color: transparent;
+          border: 1px solid #aaa;
+          color: #aaa;
+          padding: 15px;
+          margin-bottom: 20px;
+        }
+        button {
+          width: 100%;
+          background-color: $primary-color;
+          color: $base-color;
+          padding: 15px;
+          cursor: pointer;
+          @include weight(semi-bold);
+        }
+      }
+    }
+    //Notebook
+    @include notebook {
+      //contact-map
+      .contact-map {
+        width: 100%;
+      }
+      //contact-form
+      .contact-form {
+        width: 100%;
+        margin-top: 30px;
+      }
+    }
+  }
+}

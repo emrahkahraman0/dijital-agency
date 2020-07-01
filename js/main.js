@@ -6,8 +6,11 @@ var lazyLoadInstance = new LazyLoad({
 });
 
 //Menu
-$(function(){
-    $('.menu').slicknav();
+$(function () {
+    $('.hamburger').on('click', function () {
+        $('.toggle').toggleClass('open');
+        $('.menu').toggleClass('open');
+    });
 });
 
 //Home-Slider-Owl
