@@ -17,6 +17,11 @@ body {
   color: $three-color;
 }
 
+::selection {
+  background-color: $primary-color;
+  color: $base-color;
+}
+
 //Header#
 #header {
   width: 100%;
@@ -987,9 +992,10 @@ body {
       .social {
         i {
           margin-right: 5px;
+          font-size: 20px;
         }
       }
-      p {line-height: 20px; font-size: 12px;}
+      p {line-height: 20px; font-size: 10px;}
     }
   }
 }
@@ -1880,6 +1886,32 @@ body {
       }
     }
   }
+}
+
+
+/////404.HTML
+//Error-Page#
+#error-page {
+ width: 100%;
+ padding: 100px 0 100px 0;
+ text-align: center;
+ h5 {
+   padding-top: 20px;
+   @include weight(bold);
+   font-size: 40px;
+   text-transform: uppercase;
+   font-family: $two-family;
+ }
+ h6 {
+   padding-top: 10px;
+   font-size: 24px;
+   font-family: $one-family;
+ }
+ //Tablet
+ @include tablet {
+   h5 {font-size: 18px;}
+   h6 {font-size: $size;}
+ }
 }
 
 
