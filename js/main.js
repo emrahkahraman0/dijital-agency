@@ -13,6 +13,25 @@ $(function () {
     });
 });
 
+//Menu-Active
+jQuery(function($) {
+    var path = window.location.href;
+    $('ul li a').each(function() {
+        if (this.href === path) {
+            $(this).addClass('active');
+        }
+    });
+});
+
+//Menu-Scroll
+$(window).scroll(function() {
+    if($(document).scrollTop() > 50) {
+        $('#header').addClass('fixed');
+    } else {
+        $('#header').removeClass('fixed')
+    }
+});
+
 //Home-Slider-Owl
 $('.home-slider-owl').owlCarousel({
     loop:true,
